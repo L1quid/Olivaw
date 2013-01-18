@@ -1,0 +1,64 @@
+Olivaw
+===================================
+
+A PhantomJS-based tool (ROBOT) for automated downloading of Amazon Associates [earning|orders|etc] reports.
+
+How It Works
+------------
+
+PhantomJS is a headless browser which one drives using Javascript.  This makes it very easy to login to the Associates site, which is otherwise difficult to do programmatically.
+
+PhantomJS, as of this writing, doesn't support file downloads, so Olivaw uses an XMLHttpRequest to get the contents of the report.  Since we can't easily share data between the Amazon page (where the XMLHttpRequest is created) and the backend Olivaw script, we monitor calls to console.log() via PhantomJS's onConsoleMessage callback, and pass the report data to Olivaw through a console.log(); Olivaw can then save the report to disk.  Hacky, but it works.
+
+Requirements
+------------
+
+PhantomJS 1.6.x (developed using 1.6.1)
+Amazon Associates account in locale(s) of choice
+
+Use
+---
+
+Run it from the command line like this:
+
+phantomjs --ignore-ssl-errors=yes --local-to-remote-url-access=yes olivaw.js <username> <password> <locale> <report type> <date> <format>
+
+The PhantomJS arguments help us avoid getting any show-stopping errors while using Olivaw.
+
+Script Arguments
+----------------
+
+All of these are required and listed in the order in which they should appear in the command line.  The given value choices are case-sensitive.
+
+* Associates Username
+* Associates Password
+* Locale: CA, CN, DE, ES, FR, IT, JP, UK, US
+* Report Type: orders, earnings, misc, linkType, trends, tags
+* Date: yesterday, lastSevenDays, monthToDate, lastMonth, QuarterToDate, q1, q2, q3, q4, YYYYMMDD-YYYYMMDD
+  * Be careful choosing too large a date range for your report; Amazon's site tends to timeout on the first request of large reports.
+* Format: xml, csv
+
+Examples
+--------
+
+CSV orders report for "yesterday" in US locale:
+* phantomjs --ignore-ssl-errors=yes --local-to-remote-url-access=yes olivaw.js US user pass orders yesterday csv
+
+XML earnings report for the month-to-date in UK locale:
+* phantomjs --ignore-ssl-errors=yes --local-to-remote-url-access=yes olivaw.js UK user pass earnings monthToDate xml
+
+Author
+------
+
+Daniel Green / Cosmic Shovel, Inc.  Purveyors of camelcamelcamel.com, camelegg.com, and camelbuy.com.
+
+License
+-------
+
+Copyright (c) 2012, 2013 Daniel Green / Cosmic Shovel, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
