@@ -271,23 +271,11 @@ var Scraper = Class.create({
     break;
 
     case "login":
-      if (this.locale != "US")
-      {
-        this.get_page().evaluate(function(username, password) {
-          document.getElementsByName("email")[0].value = username;
-          document.getElementsByName("password")[0].value = password;
-          document.getElementsByName("sign_in")[0].submit();
-          //fireEvent(, "submit");
-        }, this.username, this.password);
-      }
-      else
-      {
-        this.get_page().evaluate(function(username, password) {
-          document.getElementById("inputemail").value = username;
-          document.getElementById("inputpw").value = password;
-          fireEvent(document.getElementById("btnsignin"), "click");
-        }, this.username, this.password);
-      }
+      this.get_page().evaluate(function(username, password) {
+        document.getElementById("username").value = username;
+        document.getElementById("password").value = password;
+        document.getElementsByName("sign_in")[0].submit();
+      }, this.username, this.password);
     break;
 
     case "report":
