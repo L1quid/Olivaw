@@ -297,10 +297,10 @@ var Scraper = Class.create({
           var regex = /([0-9]{4})([0-9]{2})([0-9]{2})\-([0-9]{4})([0-9]{2})([0-9]{2})/i;
           var m = date_option.match(regex);
           url += "&periodType=exact";
-          url += "&startMonth=" + String(m[2]);
+          url += "&startMonth=" + String(m[2] - 1);
           url += "&startDay=" + String(m[3]);
           url += "&startYear=" + String(m[1]);
-          url += "&endMonth=" + String(m[5]);
+          url += "&endMonth=" + String(m[5] - 1);
           url += "&endDay=" + String(m[6]);
           url += "&endYear=" + String(m[4]);
         }
