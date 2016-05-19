@@ -22,7 +22,7 @@ var cache_dir = "./", report_type = null, date_option = null, file_format = null
 if (system.args.length < 7 || phantom.args.indexOf("-h") != -1)
 {
   dmsg("Case-sensitive script arguments: username password locale report_type date_option file_format");
-  dmsg("Locale: CA, CN, DE, ES, FR, IT, JP, UK, US");
+  dmsg("Locale: CA, CN, DE, ES, MX, FR, IT, JP, UK, US");
   dmsg("report_type: orders, earnings, misc, linkType, trends, tags");
   dmsg("date_option: yesterday, lastSevenDays, monthToDate, lastMonth, QuarterToDate, q1, q2, q3, q4, YYYYMMDD-YYYYMMDD");
   dmsg("file_format: xml, csv");

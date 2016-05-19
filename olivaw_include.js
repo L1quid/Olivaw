@@ -128,6 +128,10 @@ var Scraper = Class.create({
       this.associates_domain = "afiliados.amazon.es";
     break;
 
+    case "MX":
+      this.associates_domain = "afiliados.amazon.com.mx";
+    break;
+
     case "FR":
       this.associates_domain = "partenaires.amazon.fr";
     break;
