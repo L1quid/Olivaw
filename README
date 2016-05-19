@@ -13,7 +13,7 @@ PhantomJS, as of this writing, doesn't support file downloads, so Olivaw uses an
 Requirements
 ------------
 
-PhantomJS 1.6.x (developed using 1.6.1)
+PhantomJS 1.9.8
 Amazon Associates account in locale(s) of choice
 
 Use
@@ -32,7 +32,7 @@ All of these are required and listed in the order in which they should appear in
 
 * Associates Username
 * Associates Password
-* Locale: CA, CN, DE, ES, FR, IT, JP, UK, US
+* Locale: CA, CN, DE, ES, MX, FR, IT, JP, UK, US
 * Report Type: orders, earnings, misc, linkType, trends, tags
 * Date: yesterday, lastSevenDays, monthToDate, lastMonth, QuarterToDate, q1, q2, q3, q4, YYYYMMDD-YYYYMMDD
   * Be careful choosing too large a date range for your report; Amazon's site tends to timeout on the first request of large reports.
@@ -50,7 +50,7 @@ XML earnings report for the month-to-date in UK locale:
 Author
 ------
 
-Daniel Green / Cosmic Shovel, Inc.  Purveyors of camelcamelcamel.com, camelegg.com, and camelbuy.com.
+Daniel Green / Cosmic Shovel, Inc.  Purveyor of camelcamelcamel.com.
 
 License
 -------
