@@ -276,9 +276,48 @@ var Scraper = Class.create({
 
     case "login":
       this.get_page().evaluate(function(username, password) {
+        for (var i = 0; i < username.length; i++)
+        {
+          var e = document.createEvent('Event');
+          e.initEvent("keydown", true, true);
+          e.keyCode = username.charCodeAt(i);
+          document.getElementById("username").dispatchEvent(e);
+          var e = document.createEvent('Event');
+          e.initEvent("keypress", true, true);
+          e.keyCode = username.charCodeAt(i);
+          document.getElementById("username").dispatchEvent(e);
+          sleep(10);
+        }
+        
+        for (var i = 0; i < password.length; i++)
+        {
+          var e = document.createEvent('Event');
+          e.initEvent("keydown", true, true);
+          e.keyCode = password.charCodeAt(i);
+          document.getElementById("password").dispatchEvent(e);
+          var e = document.createEvent('Event');
+          e.initEvent("keypress", true, true);
+          e.keyCode = password.charCodeAt(i);
+          document.getElementById("password").dispatchEvent(e);
+          sleep(10);
+        }
+        
         document.getElementById("username").value = username;
         document.getElementById("password").value = password;
-        document.getElementsByName("sign_in")[0].submit();
+        
+        var e = document.createEvent('HTMLEvents');
+        e.initEvent("mousedown", false, true);
+        document.getElementById("btnsignin").dispatchEvent(e);
+        
+        var e = document.createEvent('HTMLEvents');
+        e.initEvent("mouseup", false, true);
+        document.getElementById("btnsignin").dispatchEvent(e);
+        
+        var e = document.createEvent('HTMLEvents');
+        e.initEvent("click", false, true);
+        document.getElementById("btnsignin").dispatchEvent(e);
+        
+        //document.getElementsByName("sign_in")[0].submit();
       }, this.username, this.password);
     break;
 
