@@ -85,6 +85,7 @@ var Scraper = Class.create({
   password: null,
   locale: null,
   associates_domain: null,
+  pointer: null,
 
   cls_dmsg: function(msg)
   {
@@ -305,19 +306,36 @@ var Scraper = Class.create({
         document.getElementById("username").value = username;
         document.getElementById("password").value = password;
         
+        var btn = null;
+        
+        if (this.locale == "US")
+          btn = document.getElementById("btnsignin");
+        else
+        {
+          for (var i = 0; i < document.getElementById("signin").childNodes.length; i++)
+          {
+            var node = document.getElementById("signin").childNodes[i];
+            
+            if (node.type == "image")
+            {
+              btn = node;
+              break;
+            }
+          }
+        }
+        
         var e = document.createEvent('HTMLEvents');
         e.initEvent("mousedown", false, true);
-        document.getElementById("btnsignin").dispatchEvent(e);
+        btn.dispatchEvent(e);
         
         var e = document.createEvent('HTMLEvents');
         e.initEvent("mouseup", false, true);
-        document.getElementById("btnsignin").dispatchEvent(e);
+        btn.dispatchEvent(e);
         
         var e = document.createEvent('HTMLEvents');
         e.initEvent("click", false, true);
-        document.getElementById("btnsignin").dispatchEvent(e);
+        btn.dispatchEvent(e);
         
-        //document.getElementsByName("sign_in")[0].submit();
       }, this.username, this.password);
     break;
 
