@@ -13,7 +13,7 @@ jQuery.noConflict();
 phantom.injectJs("Class-0.0.2.min.js");
 phantom.injectJs("olivaw_include.js");
 
-dmsg("Olivaw v0.1 By Daniel Green / Cosmic Shovel, Inc.");
+dmsg("Olivaw v0.2 By Daniel Green / Cosmic Shovel, Inc.");
 dmsg("Disclaimer: We intend nothing malicious through the use or release of this tool.  Associates have a legitimate need of a way to automate processing of affiliate reports.  Amazon has nothing to do with this tool, please don't ask them about, or to support, it.");
 
 var system = require('system');

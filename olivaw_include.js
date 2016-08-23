@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012, 2013 Daniel Green / Cosmic Shovel, Inc.
+Copyright (c) 2012, 2013, 2016 Daniel Green / Cosmic Shovel, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -274,19 +274,28 @@ var Scraper = Class.create({
       set_url("https://" + this.associates_domain + "/");
       this.get_page().open(get_url());
     break;
+    
+    case "pre-login":
+      set_url("https://" + this.associates_domain + "/login");
+      this.get_page().open(get_url());
+    break;
 
     case "login":
-      this.get_page().evaluate(function(username, password) {
+      this.get_page().evaluate(function(username, password, locale) {
+        var user_elm_id = locale == "US" ? "ap_email" : "username";
+        var pass_elm_id = locale == "US" ? "ap_password" : "password";
+        var btn_elm_id = locale == "US" ? "signInSubmit" : "btnsignin";
+        
         for (var i = 0; i < username.length; i++)
         {
           var e = document.createEvent('Event');
           e.initEvent("keydown", true, true);
           e.keyCode = username.charCodeAt(i);
-          document.getElementById("username").dispatchEvent(e);
+          document.getElementById(user_elm_id).dispatchEvent(e);
           var e = document.createEvent('Event');
           e.initEvent("keypress", true, true);
           e.keyCode = username.charCodeAt(i);
-          document.getElementById("username").dispatchEvent(e);
+          document.getElementById(user_elm_id).dispatchEvent(e);
           sleep(10);
         }
         
@@ -295,22 +304,20 @@ var Scraper = Class.create({
           var e = document.createEvent('Event');
           e.initEvent("keydown", true, true);
           e.keyCode = password.charCodeAt(i);
-          document.getElementById("password").dispatchEvent(e);
+          document.getElementById(pass_elm_id).dispatchEvent(e);
           var e = document.createEvent('Event');
           e.initEvent("keypress", true, true);
           e.keyCode = password.charCodeAt(i);
-          document.getElementById("password").dispatchEvent(e);
+          document.getElementById(pass_elm_id).dispatchEvent(e);
           sleep(10);
         }
         
-        document.getElementById("username").value = username;
-        document.getElementById("password").value = password;
+        document.getElementById(user_elm_id).value = username;
+        document.getElementById(pass_elm_id).value = password;
         
-        var btn = null;
+        var btn = document.getElementById(btn_elm_id);
         
-        if (this.locale == "US")
-          btn = document.getElementById("btnsignin");
-        else
+        if (!btn)
         {
           for (var i = 0; i < document.getElementById("signin").childNodes.length; i++)
           {
@@ -336,7 +343,7 @@ var Scraper = Class.create({
         e.initEvent("click", false, true);
         btn.dispatchEvent(e);
         
-      }, this.username, this.password);
+      }, this.username, this.password, this.locale);
     break;
 
     case "report":
@@ -455,6 +462,10 @@ var Scraper = Class.create({
     {
     // home page
     case "home":
+      phantom.state = this.locale == "US" ? "pre-login" : "login";
+    break;
+    
+    case "pre-login":
       phantom.state = "login";
     break;
 
