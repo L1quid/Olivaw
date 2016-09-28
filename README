@@ -42,10 +42,10 @@ Examples
 --------
 
 CSV orders report for "yesterday" in US locale:
-* phantomjs --ignore-ssl-errors=yes --local-to-remote-url-access=yes olivaw.js US user pass orders yesterday csv
+* phantomjs --ignore-ssl-errors=yes --local-to-remote-url-access=yes olivaw.js user pass US orders yesterday csv
 
 XML earnings report for the month-to-date in UK locale:
-* phantomjs --ignore-ssl-errors=yes --local-to-remote-url-access=yes olivaw.js UK user pass earnings monthToDate xml
+* phantomjs --ignore-ssl-errors=yes --local-to-remote-url-access=yes olivaw.js user pass UK earnings monthToDate xml
 
 Author
 ------

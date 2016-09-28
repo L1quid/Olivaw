@@ -19,7 +19,7 @@ dmsg("Disclaimer: We intend nothing malicious through the use or release of this
 var system = require('system');
 var cache_dir = "./", report_type = null, date_option = null, file_format = null, username = null, password = null;
 
-if (system.args.length < 7 || phantom.args.indexOf("-h") != -1)
+if (system.args.length < 7 || system.args.indexOf("-h") != -1)
 {
   dmsg("Case-sensitive script arguments: username password locale report_type date_option file_format");
   dmsg("Locale: CA, CN, DE, ES, MX, FR, IT, JP, UK, US");
